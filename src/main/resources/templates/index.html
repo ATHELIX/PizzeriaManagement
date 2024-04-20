@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+
+<head>
+<meta charset="ISO-8859-1">
+<title>PIZZA LO DEL PELA Pedidos</title>
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+	integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N"
+	crossorigin="anonymous">
+
+<link rel="stylesheet" href="index.css" />
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+	<a class="navbar-brand" href="/">Inicio</a>
+	<button class="navbar-toggler" type="button" data-toggle="collapse"
+		data-target="#navbarNav" aria-controls="navbarNav"
+		aria-expanded="false" aria-label="Toggle navigation">
+		<span class="navbar-toggler-icon"></span>
+	</button>
+	<div class="collapse navbar-collapse" id="navbarNav">
+		<ul class="navbar-nav">
+			<li class="nav-item active"><a class="nav-link"
+				href="/pedidosproductos">Pedidos Productos <span class="sr-only">(current)</span></a>
+			</li>
+			<li class="nav-item"><a class="nav-link"
+				href="/listadoproductos">Productos</a></li>
+			<li class="nav-item"><a class="nav-link" href="/pedidos">PEDIDOS</a>
+			</li>
+			<li class="nav-item"><a class="nav-link" href="/clientes">Clientes</a>
+			</li>
+		</ul>
+	</div>
+</nav>
+<h1 class="container mt-4 text-center">PIZZA LO DEL PELA</h1>
+</head>
+
+<body>
+
+	<div class="container mt-4 text-center">
+		<h1>Bienvenidos a la pizzeria del Pela</h1>
+		<h2>Donde todos tus gustos se hacen realidad</h2>
+	</div>
+
+	<a href="#openModal">Lanzar el modal</a>
+
+	<div id="openModal" class="modalDialog">
+		<div>
+			<a href="#close" title="Close" class="close">X</a>
+			<h2>Mi modal</h2>
+			<p>Este es un ejemplo de modal, creado gracias al poder de CSS3.</p>
+			<p>Puedes hacer un montón de cosas aquí, como alertas o incluso
+				crear un formulario de registro aquí mismo.</p>
+		</div>
+	</div>
+
+
+</body>
+
+</html>

@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+
+<head>
+	<meta charset="ISO-8859-1">
+	<title>PIZZA LO DEL PELA Pedidos</title>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+		integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+
+	<link rel="stylesheet" href="index.css" />
+
+	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+		<a class="navbar-brand" href="/">Inicio</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+			aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarNav">
+			<ul class="navbar-nav">
+				<li class="nav-item active">
+					<a class="nav-link" href="/pedidosproductos">Pedidos Productos <span
+							class="sr-only">(current)</span></a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="/listadoproductos">Productos</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="/pedidos">PEDIDOS</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="/clientes">Clientes</a>
+				</li>
+			</ul>
+		</div>
+	</nav>
+	<h1 class="container mt-4 text-center"> PIZZA LO DEL PELA</h1>
+</head>
+<script>
+	function confirmacion2() {
+		var respuesta = confirm("Â¿Desea borrar el pedido?");
+		if (respuesta == true) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+</script>
+<script>
+	function aviso() {
+		var respuesta = confirm("Â¿Desea marcar como avisado?");
+		if (respuesta == true) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+</script>
+<script>
+	function entregado() {
+		var respuesta = confirm("Â¿Desea marcar como entregado?");
+		if (respuesta == true) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+</script>
+
+<body>
+	
+		<a href="#openModal">Lanzar el modal</a>
+
+	<div id="openModal" class="modalDialog">
+		<div>
+			<a href="#close" title="Close" class="close">X</a>
+			<h2>Mi modal</h2>
+			<p>Este es un ejemplo de modal, creado gracias al poder de CSS3.</p>
+			<p>Puedes hacer un montón de cosas aquí, como alertas o incluso
+				crear un formulario de registro aquí mismo.</p>
+		</div>
+	</div>
+	
+
+	<div class="container mt-4">
+		<h3>Pedidos</h3>
+
+
+		<div class="row">
+
+
+			<table class="table table-striped table-bordered">
+				<thead class="table-dark">
+
+					<a th:href="@{/new/pedido}" class="btn btn-primary">Agregar</a>
+					<tr>
+						<th>Pedido NÂº</th>
+						<th>Fecha</th>
+						<th>Cliente</th>
+						<th>Hora de entrega</th>
+
+
+						<th class="text-center">Pizzas</th>
+						<th class="text-center">Empanadas</th>
+						<th>Total</th>
+						<th>Forma de Pago</th>
+
+						<th>Acciones</th>
+
+
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="pedidox : ${pedido}" class="container mt-4 text-center">
+						<td th:text="${pedidox.id}">NÂº Pedido</td>
+						<td th:text="${#dates.format(pedidox.fecha, 'dd/MM')}">Fecha</td>
+						<td>
+							<label th:each="papu:${pedidox.cliente}" th:text="${papu.nombre}"> </label>
+							<span>______________________</span>
+							Dirección de envío:
+							<label th:text="${pedidox.dirNueva}"> </label>
+						</td>
+						<td th:text="${pedidox.horaEntrega}">Hora de entrega</td>
+
+
+						<td>
+							<div th:each="pija:${pedidox.pizzas}">
+								<span th:text="${pija.cantidad}+'x '+${pija.nombre}"></span>
+								<span>______________________</span>
+
+							</div>
+							<a th:href="@{/new/pedidospizzas/}+${pedidox.id}" class="btn btn-warning">Agregar</a>
+						</td>
+						<td>
+							<div th:each="empa:${pedidox.empanadas}">
+								<span th:text="${empa.cantidad}+'x '+${empa.nombre}"></span>
+								<span>______________________</span>
+							</div>
+							<a th:href="@{/new/pedidosempanadas/}+${pedidox.id}" class="btn btn-warning">Agregar</a>
+						</td>
+						<td th:text="${pedidox.totalPizza}+${pedidox.totalEmpanada}">Total</td>
+
+
+
+						<td>
+							<table>
+								<tr>
+									<td>
+										Efectivo: $
+										<label th:text="${pedidox.pagoEfectivo}">Forma de Pago</label>
+									</td>
+								</tr>
+								<tr>
+									<td nowrap>
+										MercadoPago: $
+										<label th:text="${pedidox.pagoMercado}">Forma de Pago</label>
+									</td>
+								</tr>
+							</table>
+							<label th:text="${pedidox.diferencia}" style="color:#FF0000"></label>
+						</td>
+
+
+
+
+						<td>
+
+
+
+							<a th:href="@{/pedido/update/}+${pedidox.id}" class="btn btn-warning">Editar</a>
+							<a th:href="@{/pedido/eliminar/}+${pedidox.id}" class="btn btn-danger"
+								onclick="return confirmacion2()">Eliminar</a>
+							<a th:href="@{/entregado/}+${pedidox.id}" class="btn btn-success"
+								onclick="return entregado()">Entregado</a>
+						</td>
+					</tr>
+
+
+
+
+
+
+				</tbody>
+
+			</table>
+
+
+		</div>
+
+
+
+	</div>
+</body>
+
+</html>
+<script type="text/javascript" src="jquery-3.7.1.min"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+	integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+	crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+	integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+	crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js"
+	integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+"
+	crossorigin="anonymous"></script>

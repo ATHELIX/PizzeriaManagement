@@ -1,0 +1,100 @@
+<head>
+	<meta charset="ISO-8859-1">
+	<title>PIZZA LO DEL PELA Actualizar Pedido</title>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+		integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+
+	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+		<a class="navbar-brand" href="/">Inicio</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+			aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarNav">
+			<ul class="navbar-nav">
+				<li class="nav-item active">
+					<a class="nav-link" href="/pedidosproductos">Pedidos Productos <span
+							class="sr-only">(current)</span></a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="/listadoproductos">Productos</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="/pedidos">PEDIDOS</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="/clientes">Clientes</a>
+				</li>
+			</ul>
+		</div>
+	</nav>
+	<h1 class="container mt-4 text-center"> PIZZA LO DEL PELA</h1>
+</head>
+
+<body>
+	<h1 class="container mt-4 text-center"> Actualizar PEDIDO</h1>
+	<div class="container mt-4 d-flex justify-content-center">
+		<div class="col-sm-8">
+			<form th:action="@{/saveup/pedido}" th:object="${pedido}" method="post">
+				<div class="card">
+					<div class="card-header">
+						<h3>Actualizar Pedidos</h3>
+					</div>
+
+
+					<div class="card-body">
+
+						<div class="form-group">
+							<label>Id</label>
+							<input th:field="*{id}" type="text" class="form-control" />
+						</div>
+
+						<div class="form-group">
+							<label>Cliente</label>
+							<select th:field="*{Cliente}" class="form-control" />
+
+							<th:block th:each="clientes: ${listadoclientes}">
+								<option th:text="${clientes.nombre}" th:value="${clientes.id}" ></option>
+
+							</th:block>
+							</select>
+
+
+
+						</div>
+
+						<div class="form-group">
+							<label>Hora de Entrega</label>
+							<input th:field="*{horaEntrega}" class="form-control" />
+						</div>
+
+						<div class="form-group">
+							<label>Forma de Pago</label>
+							<select th:field="*{formaDePago}" required>
+								<option value="Mercado Pago">Mercado Pago </option>
+								<option value="Efectivo">Efectivo </option>
+								<option value="Sin aviso, preguntar">Sin aviso, preguntar</option>
+							</select>
+						</div>
+						
+						<div class="form-group">
+										
+								<input th:field="*{pizzas}" class="form-control" hidden />
+								<input th:field="*{empanadas}" class="form-control" hidden />
+								<input th:field="*{estado}" class="form-control" hidden />						
+						</div>
+
+						<input type="submit" value="Guardar" class="btn btn-success">
+						<div class="card-footer"></div>
+
+
+
+					</div>
+
+
+			</form>
+		</div>
+	</div>
+</body>
+
+</html>
